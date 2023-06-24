@@ -214,6 +214,19 @@ else()
     message("libsharpyuv: disabled")
 endif ()
 
+# Libyuv
+option(WITH_LIBYUV "Build libyuv" ON)
+if (WITH_LIBYUV)
+    find_package(libyuv)
+endif ()
+if (LIBYUV_FOUND)
+    message("libyuv: found")
+elseif (WITH_${variableName})
+    message("libyuv: not found")
+else()
+    message("libyuv: disabled")
+endif ()
+
 # --- Create libheif pkgconfig file
 
 set(prefix ${CMAKE_INSTALL_PREFIX})

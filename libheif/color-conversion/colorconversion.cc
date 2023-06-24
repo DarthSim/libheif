@@ -33,6 +33,7 @@
 #include <string>
 #include "rgb2yuv.h"
 #include "rgb2yuv_sharp.h"
+#include "rgb2yuv_libyuv.h"
 #include "yuv2rgb.h"
 #include "rgb2rgb.h"
 #include "monochrome.h"
@@ -249,6 +250,7 @@ void ColorConversionPipeline::init_ops()
   ops.push_back(std::make_shared<Op_YCbCr444_to_YCbCr422_average<uint8_t>>());
   ops.push_back(std::make_shared<Op_YCbCr444_to_YCbCr422_average<uint16_t>>());
   ops.push_back(std::make_shared<Op_Any_RGB_to_YCbCr_420_Sharp>());
+  ops.push_back(std::make_shared<Op_Any_RGB_to_YCbCr_420_400_Libyuv>());
 }
 
 

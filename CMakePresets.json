@@ -67,6 +67,7 @@
         "WITH_REDUCED_VISIBILITY" : "OFF",
         "WITH_DEFLATE_HEADER_COMPRESSION" : "ON",
         "WITH_LIBSHARPYUV" : "ON",
+        "WITH_LIBYUV" : "ON",
         "WITH_EXAMPLES": "ON",
         "WITH_FUZZERS": "OFF"
       }
@@ -83,6 +84,7 @@
         "WITH_REDUCED_VISIBILITY" : "ON",
         "WITH_DEFLATE_HEADER_COMPRESSION" : "ON",
         "WITH_LIBSHARPYUV" : "ON",
+        "WITH_LIBYUV" : "ON",
         "WITH_EXAMPLES": "ON",
         "WITH_FUZZERS": "OFF"
       }
@@ -136,6 +138,7 @@
         "ENABLE_PLUGIN_LOADING" : "OFF",
         "WITH_DEFLATE_HEADER_COMPRESSION" : "ON",
         "WITH_LIBSHARPYUV" : "ON",
+        "WITH_LIBYUV" : "ON",
         "WITH_REDUCED_VISIBILITY" : "OFF"
       }
     }

@@ -55,6 +55,8 @@ set(libheif_sources
         color-conversion/rgb2yuv.h
         color-conversion/rgb2yuv_sharp.cc
         color-conversion/rgb2yuv_sharp.h
+        color-conversion/rgb2yuv_libyuv.cc
+        color-conversion/rgb2yuv_libyuv.h
         color-conversion/yuv2rgb.cc
         color-conversion/yuv2rgb.h
         color-conversion/rgb2rgb.cc
@@ -125,6 +127,15 @@ if (LIBSHARPYUV_FOUND)
     target_link_libraries(heif PRIVATE ${LIBSHARPYUV_LIBRARIES})
 else ()
     message("Not compiling 'libsharpyuv'")
+endif ()
+
+if (LIBYUV_FOUND)
+    message("Compiling in 'libyuv'")
+    target_compile_definitions(heif PUBLIC HAVE_LIBYUV=1)
+    target_include_directories(heif PRIVATE ${LIBYUV_INCLUDE_DIR})
+    target_link_libraries(heif PRIVATE ${LIBYUV_LIBRARIES} ${LIBYUV_LINKDIR})
+else ()
+    message("Not compiling 'libyuv'")
 endif ()
 
 if (WITH_DEFLATE_HEADER_COMPRESSION)
