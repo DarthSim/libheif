@@ -2551,6 +2551,22 @@ Error HeifContext::encode_image_as_hevc(const std::shared_ptr<HeifPixelImage>& i
                  heif_suberror_Invalid_image_size);
   }
 
+  if (encoder->plugin->plugin_api_version >= 3 &&
+      encoder->plugin->query_encoded_size != nullptr) {
+    uint32_t check_encoded_width = out_image->get_width();
+    uint32_t check_encoded_height = out_image->get_height();
+
+    encoder->plugin->query_encoded_size(encoder->encoder,
+                                        out_image->get_width(),
+                                        out_image->get_height(),
+                                        &check_encoded_width,
+                                        &check_encoded_height);
+
+    assert((int)check_encoded_width == encoded_width);
+    assert((int)check_encoded_height == encoded_height);
+  }
+
+
   // Note: 'ispe' must be before the transformation properties
   m_heif_file->add_ispe_property(image_id, encoded_width, encoded_height);
 
@@ -2916,9 +2932,9 @@ Error HeifContext::encode_image_as_jpeg2000(const std::shared_ptr<HeifPixelImage
   for (;;) {
     uint8_t* data;
     int size;
-    
+
     encoder->plugin->get_compressed_data(encoder->encoder, &data, &size, nullptr);
-    
+
     if (data == NULL) {
       break;
     }
@@ -2932,7 +2948,7 @@ Error HeifContext::encode_image_as_jpeg2000(const std::shared_ptr<HeifPixelImage
 
 
 
-  //Add 'ispe' Property 
+  //Add 'ispe' Property
   m_heif_file->add_ispe_property(image_id, image->get_width(), image->get_height());
 
   //Add 'colr' Property
